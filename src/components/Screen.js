@@ -10,6 +10,7 @@ const Display = styled.div`
     align-items: center;
     justify-content: flex-end;
     padding-right: 1rem;
+    grid-area: display;
 `
 
 const screen = ( props ) => {

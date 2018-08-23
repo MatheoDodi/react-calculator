@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Wrapper } from './styledComponents/Styled';
-import Number from './Number';
+import Numbers from './Numbers';
 import Screen from './Screen';
+import Operations from './Operations';
 
 class Calculator extends Component {
     state = {
@@ -15,7 +16,8 @@ class Calculator extends Component {
         return (    
             <Wrapper>
                 <Screen>{this.state.sum}</Screen>
-                <Number>1</Number>
+                <Operations />
+                <Numbers />
             </Wrapper>
         )
     }
