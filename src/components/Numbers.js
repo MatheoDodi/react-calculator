@@ -4,17 +4,17 @@ import { Ac, Zer, One, Two, Three, Four, Five, Six, Seven, Eight, Nine } from '.
 const numbers = ( props ) => {
     return (
         <Fragment>
-            <Ac>AC</Ac>
-            <Zer>0</Zer>
-            <One>1</One>
-            <Two>2</Two>
-            <Three>3</Three>
-            <Four>4</Four>
-            <Five>5</Five>
-            <Six>6</Six>
-            <Seven>7</Seven>
-            <Eight>8</Eight>
-            <Nine>9</Nine>
+            <Ac className="number" onClick={props.clear}>AC</Ac>
+            <Zer className="number" onClick={props.click}>0</Zer>
+            <One className="number" onClick={props.click}>1</One>
+            <Two className="number" onClick={props.click}>2</Two>
+            <Three className="number" onClick={props.click}>3</Three>
+            <Four className="number" onClick={props.click}>4</Four>
+            <Five className="number" onClick={props.click}>5</Five>
+            <Six className="number" onClick={props.click}>6</Six>
+            <Seven className="number" onClick={props.click}>7</Seven>
+            <Eight className="number" onClick={props.click}>8</Eight>
+            <Nine className="number" onClick={props.click}>9</Nine>
         </Fragment>
     )
 }
