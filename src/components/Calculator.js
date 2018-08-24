@@ -6,36 +6,45 @@ import Operations from './Operations';
 
 class Calculator extends Component {
     state = {
-        sum: '',
-        diff: 0,
+        total: 0,
         screen: '',
         operation: ''
     }
 
     numberHandler = (e) => {
+
         let num = this.state.screen;
         num += e.target.innerText;
         this.setState( { screen : num } );
     }
 
-    summaryHandler = (e) => {
+    plusHandler = (e) => {
+        const prevNumber = this.state.screen;
+        this.setState( { screen: '', operation: 'plus', total: Number(prevNumber) } );
+    }
 
-        this.setState( { screen: '', operation: 'Summary' } );
-        let prevNumber = this.state.screen;
-        this.setState( { sum: prevNumber } );
+    minusHandler = () => {
+        const prevNumber = this.state.screen
+        this.setState( { screen: '', operation: 'minus', total: Number(prevNumber) } );
     }
 
     equalsHandler = (e) => {
         const operation = this.state.operation;
-        if ( operation === 'Summary') {
+        if ( operation === 'plus') {
             const NumbOnScreen = this.state.screen;
-            const SumSoFar = this.state.sum;
-            this.setState( { screen: Number(NumbOnScreen) + Number(SumSoFar) } );
+            const totalSoFar = this.state.total;
+            this.setState( { screen: Number(NumbOnScreen) + Number(totalSoFar) } );
+        } else if ( operation === 'minus' ) {
+            const NumbOnScreen = this.state.screen;
+            const totalSoFar = this.state.total;
+            this.setState( { screen: Number(totalSoFar) - Number(NumbOnScreen) } );
         }
     }
 
+    
+
     clearScreenHandler = () => {
-        this.setState( { sum: '', screen: '', operation: '' } )
+        this.setState( { total: '', screen: '', operation: '' } )
     }
 
     render () {
@@ -45,7 +54,8 @@ class Calculator extends Component {
                 <Screen>{this.state.screen}</Screen>
                 <Operations 
                     equals={this.equalsHandler}
-                    add={this.summaryHandler} />
+                    add={this.plusHandler} 
+                    minus={this.minusHandler}/>
                 <Numbers 
                     click={this.numberHandler} 
                     clear={this.clearScreenHandler} />
