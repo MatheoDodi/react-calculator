@@ -83,21 +83,22 @@ class Calculator extends Component {
     multiplyHandler = () => {
         const prevNumber = this.state.screen; 
         const numSoFar = this.state.total;
-        const operation = this.this.state.operation;
+        const operation = this.state.operation;
         if (numSoFar === 0) {
             this.setState( { screen: '', operation: 'multiply', total: Number(prevNumber) } );
         } else {
-            this.setState( { screen: '', operation: 'multiply', total: numSoFar * Number(prevNumber) } );
+            this.operationCheck(operation, 'multiply');
         }      
     }
 
     divideHandler = () => {
         const prevNumber = this.state.screen; 
         const numSoFar = this.state.total;
+        const operation = this.state.operation;
         if (numSoFar === 0) {
             this.setState( { screen: '', operation: 'divide', total:  Number(prevNumber) } );
         } else {
-            this.setState( { screen: '', operation: 'divide', total: numSoFar / Number(prevNumber) } );      
+            this.operationCheck(operation, 'divide');
         }
     }
 

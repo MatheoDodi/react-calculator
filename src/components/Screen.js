@@ -19,10 +19,15 @@ const Text = styled.span`
     height: 50px;
 `
 
+const Text2 = styled.span`
+    height: 50px;
+    color: lightblue;
+`
+
 const screen = ( props ) => {
     return (
         <Display>
-            <Text>{props.previousSum}</Text>
+            <Text2>{props.previousSum}</Text2>
             <Text>{props.children}</Text>
         </Display>
     )
