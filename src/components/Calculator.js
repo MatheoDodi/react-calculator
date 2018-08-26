@@ -11,30 +11,24 @@ class Calculator extends Component {
         operation: ''
     }
 
-    numberHandler = (e) => {
-        let num = this.state.screen;
-        num += e.target.innerText;
-        this.setState( { screen : num } );
-    }
-
-    plusHandler = (e) => {
-        const prevNumber = this.state.screen;
-        this.setState( { screen: '', operation: 'plus', total: Number(prevNumber) } );
-    }
-
-    minusHandler = () => {
-        const prevNumber = this.state.screen
-        this.setState( { screen: '', operation: 'minus', total: Number(prevNumber) } );
-    }
-
-    multiplyHandler = () => {
-        const prevNumber = this.state.screen; 
-        this.setState( { screen: '', operation: 'multiply', total: Number(prevNumber) } );      
-    }
-
-    divideHandler = () => {
-        const prevNumber = this.state.screen; 
-        this.setState( { screen: '', operation: 'divide', total: Number(prevNumber) } );      
+    operationCheck = (prevOperation, newOperation) => {
+        if ( prevOperation === 'plus') {
+            const NumbOnScreen = this.state.screen;
+            const totalSoFar = this.state.total;
+            this.setState( { total: Number(NumbOnScreen) + Number(totalSoFar), screen: '', operation: newOperation } );
+        } else if ( prevOperation === 'minus' ) {
+            const NumbOnScreen = this.state.screen;
+            const totalSoFar = this.state.total;
+            this.setState( { total: Number(totalSoFar) - Number(NumbOnScreen), screen: '', operation: newOperation} );
+        } else if (prevOperation === 'multiply') {
+            const NumbOnScreen = this.state.screen;
+            const totalSoFar = this.state.total;
+            this.setState( { total: Number(totalSoFar) * Number(NumbOnScreen), screen: '', operation: newOperation} );
+        } else if (prevOperation === 'divide') {
+            const NumbOnScreen = this.state.screen;
+            const totalSoFar = this.state.total;
+            this.setState( { total: Number(totalSoFar) / Number(NumbOnScreen), screen: '', operation: newOperation} );
+        }
     }
 
     equalsHandler = (e) => {
@@ -58,17 +52,64 @@ class Calculator extends Component {
         }
     }
 
+    numberHandler = (e) => {
+        let num = this.state.screen;
+        num += e.target.innerText;
+        this.setState( { screen : num } );
+    }
 
+    plusHandler = (e) => {
+        const prevNumber = this.state.screen;
+        const numSoFar = this.state.total;
+        const operation = this.state.operation;
+        if (operation) {
+            this.operationCheck(operation, 'plus');
+        } else {
+            this.setState( { screen: '', operation: 'plus', total: numSoFar +  Number(prevNumber) } );
+        }
+    }
+
+    minusHandler = () => {
+        const prevNumber = this.state.screen;
+        const numSoFar = this.state.total;
+        const operation = this.state.operation;
+        if (operation) {
+            this.operationCheck(operation, 'minus');
+        } else {
+            this.setState( { screen: '', operation: 'minus', total: numSoFar -  Number(prevNumber) } );
+        }
+    }
+
+    multiplyHandler = () => {
+        const prevNumber = this.state.screen; 
+        const numSoFar = this.state.total;
+        const operation = this.this.state.operation;
+        if (numSoFar === 0) {
+            this.setState( { screen: '', operation: 'multiply', total: Number(prevNumber) } );
+        } else {
+            this.setState( { screen: '', operation: 'multiply', total: numSoFar * Number(prevNumber) } );
+        }      
+    }
+
+    divideHandler = () => {
+        const prevNumber = this.state.screen; 
+        const numSoFar = this.state.total;
+        if (numSoFar === 0) {
+            this.setState( { screen: '', operation: 'divide', total:  Number(prevNumber) } );
+        } else {
+            this.setState( { screen: '', operation: 'divide', total: numSoFar / Number(prevNumber) } );      
+        }
+    }
 
     clearScreenHandler = () => {
-        this.setState( { total: '', screen: '', operation: '' } )
+        this.setState( { total: 0, screen: '', operation: '' } )
     }
 
     render () {
 
         return (    
             <Wrapper>
-                <Screen>{this.state.screen}</Screen>
+                <Screen previousSum={this.state.total}>{this.state.screen}</Screen>
                 <Operations 
                     equals={this.equalsHandler}
                     add={this.plusHandler} 

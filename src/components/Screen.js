@@ -11,12 +11,19 @@ const Display = styled.div`
     justify-content: flex-end;
     padding-right: 1rem;
     grid-area: display;
+    display: grid;
+    align-items: center;
+`
+
+const Text = styled.span`
+    height: 50px;
 `
 
 const screen = ( props ) => {
     return (
         <Display>
-            {props.children}
+            <Text>{props.previousSum}</Text>
+            <Text>{props.children}</Text>
         </Display>
     )
 }

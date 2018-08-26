@@ -10,6 +10,7 @@ export  const Wrapper = styled.div`
             grid-gap: 1px;
             box-shadow: 7px 7px 5px rgba(0,0,0, .2);
             grid-template-areas: 'display display display display'
+                                 'display display display display'
                                  'ac ac ac divide'
                                  'seven eight nine mult'
                                  'four five six minus'
